@@ -1,0 +1,123 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class UnitController : MonoBehaviour {
+    private Vector2 _initialPosition;
+    Vector2 _finalPosition;
+    public Texture2D RectangleTexture;
+    private static List<BaseUnit> _unitsInScene;
+    public Camera mainCamera;
+    private BaseUnit[] _selectedUnits;
+
+    // Use this for initialization
+    void Awake()
+    {
+        _unitsInScene = new List<BaseUnit>();
+        _selectedUnits = new BaseUnit[0];
+    }
+
+    void OnGUI()
+    {
+        if (Input.GetButtonDown("Fire1")) //Grava a posição inicial do clique do mouse
+        {
+            _initialPosition = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+        }
+        if (Input.GetButton("Fire1"))
+        {
+            _finalPosition = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+            GUI.DrawTexture(new Rect(_initialPosition.x, _initialPosition.y, _finalPosition.x - _initialPosition.x, _finalPosition.y - _initialPosition.y), RectangleTexture);
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            if(_finalPosition == _initialPosition)
+            {
+                return;
+            }
+            foreach(BaseUnit unit in _selectedUnits)
+            {
+                unit.IsSelected = false;
+            }
+            float xMin = Mathf.Min(_initialPosition.x, _finalPosition.x);
+            float yMin = Mathf.Min(_initialPosition.y, _finalPosition.y);
+            float width = Mathf.Abs(_initialPosition.x - _finalPosition.x);
+            float height = Mathf.Abs(_initialPosition.y - _finalPosition.y);
+
+            _selectedUnits = GetUnitsUnderRectangle(new Rect(xMin, yMin, width, height));
+
+            foreach(BaseUnit unit in _selectedUnits)
+            {
+                unit.IsSelected = true;
+            }
+        }
+    }
+	
+	
+	// Update is called once per frame
+	void Update () {
+        if (Input.GetButtonUp("Fire2"))
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit; //Pontos da colisão...
+            if (Physics.Raycast(ray.origin, ray.direction, out hit))
+            {
+                ResourceRoot source = hit.transform.GetComponent<ResourceRoot>();
+
+                if(source != null)
+                {
+                    foreach(BaseUnit unit in _selectedUnits)
+                    {
+                        unit.ActionCallback(source);
+                    }
+                    return;
+                }
+                
+                foreach (BaseUnit unit in _selectedUnits)
+                {
+                    unit.ActionCallback(hit.point);
+                }
+            }
+        }
+	}
+
+    private BaseUnit[] GetUnitsUnderRectangle(Rect selectionRectangle)
+    {
+        List<BaseUnit> selectedUnits = new List<BaseUnit>();
+        foreach(BaseUnit unit in _unitsInScene)
+        {
+            Vector3 unitPositionInScene = mainCamera.WorldToScreenPoint(unit.transform.position);
+            Vector2 convertedUnitPosition = new Vector2(unitPositionInScene.x, Screen.height - unitPositionInScene.y);
+            if (selectionRectangle.Contains(convertedUnitPosition))
+            {
+                //Selecionar unidade
+                selectedUnits.Add(unit);
+            }
+        }
+        return selectedUnits.ToArray();
+    }
+
+    public static void AddBaseUnitToList(BaseUnit unit)
+    {
+        _unitsInScene.Add(unit);
+    }
+
+    public static IResourceReceiver GetClosestResourceReceiver(ResourceType resource, Vector3 relativeTo)
+    {
+        float minDistance = Mathf.Infinity;
+        StorageBuild closest = null;
+
+        foreach(BaseUnit unit in _unitsInScene)
+        {
+            if(unit is IResourceReceiver)
+            {
+                float currentDistance = Vector3.Distance(unit.transform.position, relativeTo);
+                if(currentDistance < minDistance && (unit as IResourceReceiver).AcceptResource(resource))
+                {
+                    closest = unit as StorageBuild;
+                    minDistance = currentDistance;
+                }
+            }
+        }
+        return closest as IResourceReceiver; 
+    }
+}

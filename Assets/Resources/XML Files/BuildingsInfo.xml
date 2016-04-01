@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<buildings>
+  <building>
+    <id>10</id>
+    <name>Wood Storage</name>
+    <resources food="0" wood="100" gold="150"></resources>
+    <description>Torre de defesa.</description>
+    <availableOn>1</availableOn>
+    <level>1</level>
+    <hp>100</hp>
+    <script arg0="wood">StorageBuilding</script>
+  </building>
+  <building>
+    <id>11</id>
+    <name>Gold Storage</name>
+    <resources food="0" wood="100" gold="150"></resources>
+    <description></description>
+    <availableOn>1</availableOn>
+    <level>1</level>
+    <hp>130</hp>
+    <script arg0="gold">StorageBuilding</script>
+  </building>
+</buildings>

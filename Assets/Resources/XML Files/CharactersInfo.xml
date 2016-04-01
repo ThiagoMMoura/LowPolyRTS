@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<characters>
+  <character>
+    <id>1</id>
+    <name>Aldeão</name>
+    <resources food="50" wood="0" gold="0"></resources>
+    <description></description>
+    <availableOn>100</availableOn>
+    <level>1</level>
+  </character>
+  <character>
+    <id>2</id>
+    <name>Soldado</name>
+    <resources food="60" wood="0" gold="0"></resources>
+    <description></description>
+    <availableOn>100</availableOn>
+    <level>1</level>
+  </character>
+</characters>
