@@ -28,18 +28,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (target != null)
             {
                 agent.SetDestination(target.position);
-                print("Target: " + target.position.ToString());
             }
             if (agent.remainingDistance > agent.stoppingDistance)
             {
-                print("Remaining: " + agent.remainingDistance + " > Stopping: " + agent.stoppingDistance);
                 character.Move(agent.desiredVelocity, false, false);
             }
             else
             {
-                print("Remaining: " + agent.remainingDistance + " < Stopping: " + agent.stoppingDistance);
                 character.Move(Vector3.zero, false, false);
-                print(gameObject.transform.position.ToString());
             }
         }
 

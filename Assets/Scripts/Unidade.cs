@@ -6,7 +6,7 @@ public class Unidade : MonoBehaviour {
     public GameObject unidade;
     public int id;
     public int vitalidade;
-    public float resistencia;
+    [Range(0f,100f)]public float resistencia;
     private bool isSelecionado;
 
 	// Use this for initialization

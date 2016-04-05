@@ -24,7 +24,7 @@ public class Humano : Movel {
 
     private IEnumerator Envelhecer()
     {
-        while (idade <= expectativaDeVida) {
+        while (idade < expectativaDeVida) {
             yield return new WaitForSeconds(Tempo.ANO);
             idade++;
             this.AoEnvelhecer();
