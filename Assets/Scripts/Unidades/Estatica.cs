@@ -1,15 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Estatica : MonoBehaviour {
+public class Estatica : Unidade {
+    public Deposito[] depositos;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public bool IsDepositoRecurso
+    {
+        get { return depositos.Length > 0; }
+    }
+
+    
+    internal override void Start () {
+        base.Start();
+    }
+
+    internal override void Update () {
+        base.Update();
+    }
+
+    public bool IsDepositoTipoRecurso(TipoRecurso tipo)
+    {
+        return ObterDepositoPorTipo(tipo) != null;
+    }
+
+    public Deposito ObterDepositoPorTipo(TipoRecurso tipo)
+    {
+        for (int i = 0; i < depositos.Length; i++)
+        {
+            if (depositos[i].isTipoAceito(tipo))
+            {
+                return depositos[i];
+            }
+        }
+        return null;
+    }
 }

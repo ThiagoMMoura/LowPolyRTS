@@ -11,7 +11,9 @@ public class Humano : Movel {
     public Sexo sexo;
     public int idade;
     public int expectativaDeVida;
-    // Use this for initialization
+    public bool isConstrutor;
+    public bool isReprodutor;
+
     internal override void Start () {
         base.Start();
         StartCoroutine(Envelhecer());
@@ -29,7 +31,7 @@ public class Humano : Movel {
             idade++;
             this.AoEnvelhecer();
         }
-        Destroy(unidade);
+        Destroy(objUnidade);
     }
 
     public virtual void AoEnvelhecer() {}

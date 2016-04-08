@@ -3,9 +3,6 @@ using System.Collections;
 
 public class Civil : Humano {
 
-    public bool isConstrutor;
-    public bool isReprodutor;
-    public bool isColetor;
     // Use this for initialization
     internal override void Start () {
         base.Start();
@@ -20,7 +17,6 @@ public class Civil : Humano {
     {
         if (idade >= 16)
         {
-            isColetor = true;
             if (idade >= 20)
             {
                 isReprodutor = true;
