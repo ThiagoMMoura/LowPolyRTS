@@ -18,7 +18,7 @@ public class Jogador : MonoBehaviour{
         unidades.Add(unidade);
     }
 
-    public IDeposito ObterDepositoRecursoMaisProximo(TipoRecurso tipo, Vector3 relativeTo)
+    public IDeposito ObterDepositoRecursoMaisProximo(TipoRecurso tipo, Vector3 relativeTo, bool incluiCheio = false)
     {
         float minDistance = Mathf.Infinity;
         Estatica deposito = null;
@@ -28,7 +28,7 @@ public class Jogador : MonoBehaviour{
             if (unit is Estatica && (unit as Estatica).IsDepositoTipoRecurso(tipo))
             {
                 float currentDistance = Vector3.Distance(unit.transform.position, relativeTo);
-                if (currentDistance < minDistance)
+                if (currentDistance < minDistance && (incluiCheio || !(unit as Estatica).EstaCheio(tipo)))
                 {
                     deposito = unit as Estatica;
                     minDistance = currentDistance;

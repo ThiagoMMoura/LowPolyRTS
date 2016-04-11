@@ -34,4 +34,14 @@ public class Estatica : Unidade {
         }
         return null;
     }
+
+    public bool EstaCheio(TipoRecurso tipo)
+    {
+        Deposito d = ObterDepositoPorTipo(tipo);
+        if (d != null)
+        {
+            return d.EstaCheio;
+        }
+        return true;
+    }
 }

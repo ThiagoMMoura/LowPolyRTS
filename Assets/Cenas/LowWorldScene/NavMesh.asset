@@ -157,6 +157,8 @@ NavMeshData:
     walkableRadius: 0.5
     walkableClimb: 0.4166667
     cellSize: 0.16666667
-  m_Heightmaps: []
+  m_Heightmaps:
+  - position: {x: 0, y: 0, z: 0}
+    terrainData: {fileID: 15600000, guid: b1bae586d249596419381a0bac0454b5, type: 2}
   m_HeightMeshes: []
   m_OffMeshLinks: []

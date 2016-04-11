@@ -9,7 +9,6 @@ public class Movel : Unidade, IColetor {
     private UnityStandardAssets.Characters.ThirdPerson.AICharacterControl _characterController;
     private GameObject _destino;
     private float _lastStoppingDistance;
-    private bool _estacionar;
     public int unidadesColetadasPorSegundo;
     public Deposito[] sacolas;
 
@@ -41,8 +40,10 @@ public class Movel : Unidade, IColetor {
         _characterController = GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>();
         _lastStoppingDistance = GetComponentInChildren<NavMeshAgent>().stoppingDistance;
         _destino = new GameObject();
+        _destino.name = "Ir Até";
         _destino.transform.localScale.Set(0, 0, 0);
         _destino.transform.position = objUnidade.transform.position;
+        _characterController.target = _destino.transform;
     }
 
     // Update is called once per frame
@@ -78,16 +79,11 @@ public class Movel : Unidade, IColetor {
                 }
             }
         }
-        print("Distância: " + _characterController.agent.remainingDistance+ " Destino: "+ _characterController.target.position.ToString()+" Posição: "+transform.position.ToString());
+        //print("Distância: " + _characterController.agent.remainingDistance+ " Destino: "+ _characterController.target.position.ToString()+" Posição: "+transform.position.ToString());
         if (_characterController.target != _destino.transform)
         {
             _characterController.agent.stoppingDistance = _lastStoppingDistance;
         }
-    }
-
-    public void Estacionar()
-    {
-        _estacionar = true;
     }
 
     public IEnumerator MoverPara(Transform target)
@@ -95,17 +91,15 @@ public class Movel : Unidade, IColetor {
         _destino.transform.position = target.position;
         _characterController.SetTarget(_destino.transform);
         yield return new WaitForSeconds(.1f);
-        //parado = false;
         do
         {
             yield return new WaitForEndOfFrame();
             if (_characterController.target.position != target.position)
             {
                 print("break");
-                break;//parado = true;
+                break;
             }
         } while (_characterController.agent.remainingDistance > _characterController.agent.stoppingDistance);
-        print("Parado");
         _characterController.agent.stoppingDistance = _lastStoppingDistance;
     }
 
@@ -131,6 +125,8 @@ public class Movel : Unidade, IColetor {
                         StopAllCoroutines();
                     }
                     yield return StartCoroutine(MoverPara(depositoProximo.transform));
+                    Deposito saco = Sacola(fonte.Tipo);
+                    saco.UsarRecurso(depositoProximo.DepositarRecurso(saco.QuantidadeAtual));
                 }
             }
         }

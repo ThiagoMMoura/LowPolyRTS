@@ -7,7 +7,7 @@ public class Deposito : IDeposito
     public GameObject gameObject;
     public TipoRecurso tipo;
     public int capacidadeMaxima;
-    private int quantidadeAtual;
+    public int quantidadeAtual;
 
     public int CapacidadeDisponivel
     {
