@@ -10,42 +10,43 @@ public enum TipoRecurso
     Ouro,
     Metal,
 }
-[System.Serializable]
-public class FonteRecurso: MonoBehaviour, IRecurso{
+public class FonteRecurso: MonoBehaviour{
 
     public TipoRecurso tipo;
-    public int quantidadeAtual;
+    public int quantidade;
+
+    void Start()
+    {
+        IRecurso recurso = GetComponent<IRecurso>();
+        if (recurso != null)
+        {
+            tipo = recurso.tipo;
+            quantidade = recurso.quantidade;
+        }
+    }
 
     public bool EstaVazio
     {
         get
         {
-            return quantidadeAtual == 0;
+            return quantidade == 0;
         }
     }
 
-    public TipoRecurso Tipo
-    {
-        get
-        {
-            return tipo;
-        }
-    }
-
-    public bool IsTipo(TipoRecurso tipo)
+    public bool isTipo(TipoRecurso tipo)
     {
         return this.tipo == tipo;
     }
 
-    public int Colher(int quantidade)
+    public int Colher(int qtd)
     {
-        if (quantidadeAtual >= quantidade)
+        if (quantidade >= qtd)
         {
-            quantidadeAtual -= quantidade;
+            quantidade -= qtd;
             return quantidade;
         }
-        int retorna = quantidadeAtual;
-        quantidadeAtual = 0;
+        int retorna = quantidade;
+        quantidade = 0;
         return retorna;
     }
 }

@@ -34,8 +34,8 @@ public class Construction : StaticUnit {
     {
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
         go.transform.position = transform.position;
-        StaticEntityProperties props = EntitiesHolder.LoadEntityById(_id) as StaticEntityProperties;
-        (UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(go, "Assets/Scripts/Construction.cs (38,10)", props.scriptInfo.script) as BaseUnit).OnCreated(props.scriptInfo.arguments);
+        //StaticEntityProperties props = EntitiesHolder.LoadEntityById(_id) as StaticEntityProperties;
+        //(UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(go, "Assets/Scripts/Construction.cs (38,10)", props.scriptInfo.script) as BaseUnit).OnCreated(props.scriptInfo.arguments);
         Destroy(gameObject);
     }
 }

@@ -1,21 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IColetor{
+public interface IColetor:IUnidade{
 
-	Deposito[] depositos
-    {
-        get;
-    }
+    int recursosColetadosPorSegundo { get; }
+    int maxRecursosPorCarregamento { get; }
+    TipoRecurso[] tiposColetaveis { get; }
 
-    int UnidadesColetadasPorSegundo
-    {
-        get;
-    }
-    bool TipoAceito(TipoRecurso tipo);
-    
-    bool EstaCheio(TipoRecurso tipo);
-    int DepositarRecurso(int quantidade, TipoRecurso tipo);
-    int ColherRecurso(IRecurso fonte);
-    IEnumerator IniciarColetaRecurso(IRecurso fonte);
 }

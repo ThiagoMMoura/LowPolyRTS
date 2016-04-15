@@ -3,21 +3,7 @@ using System.Collections;
 
 public interface IRecurso{
 
-    bool EstaVazio
-    {
-        get;
-    }
+    TipoRecurso tipo { get; }
+    int quantidade { get; }
 
-    TipoRecurso Tipo
-    {
-        get;
-    }
-
-    Transform transform
-    {
-        get;
-    }
-
-    bool IsTipo(TipoRecurso tipo);
-    int Colher(int quantidade);
 }

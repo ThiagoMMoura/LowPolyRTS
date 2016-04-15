@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Estatica : Unidade {
+public class Estatica : MonoBehaviour {
     public Deposito[] depositos;
 
     public bool IsDepositoRecurso
@@ -10,12 +10,11 @@ public class Estatica : Unidade {
     }
 
     
-    internal override void Start () {
-        base.Start();
+    internal virtual void Start () {
+        
     }
 
-    internal override void Update () {
-        base.Update();
+    internal virtual void Update () {
     }
 
     public bool IsDepositoTipoRecurso(TipoRecurso tipo)

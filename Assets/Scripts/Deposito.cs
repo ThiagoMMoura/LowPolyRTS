@@ -1,56 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-[System.Serializable]
-public class Deposito : IDeposito
+[RequireComponent(typeof(Unidade))]
+public class Deposito : MonoBehaviour
 {
-    public GameObject gameObject;
     public TipoRecurso tipo;
     public int capacidadeMaxima;
     public int quantidadeAtual;
+    public int maxTrabalhadores;
+    public List<Civil> trabalhadores;
+
+    public void Start()
+    {
+        IDeposito deposito = GetComponent<IDeposito>();
+        if(deposito != null)
+        {
+            tipo = deposito.tipo;
+            capacidadeMaxima = deposito.capacidadeMaxima;
+            maxTrabalhadores = deposito.maxTrabalhadores;
+        }
+    }
 
     public int CapacidadeDisponivel
     {
         get{ return capacidadeMaxima - quantidadeAtual; }
     }
 
-    public bool DepositoLimitado
-    {
-        get
-        {
-            return capacidadeMaxima > 0;
-        }
-    }
-
-    public int QuantidadeAtual
-    {
-        get
-        {
-            return quantidadeAtual;
-        }
-    }
-
-    public TipoRecurso Tipo
-    {
-        get
-        {
-            return tipo;
-        }
-    }
-
     public bool EstaCheio
     {
         get
         {
-            return capacidadeMaxima == quantidadeAtual;
-        }
-    }
-
-    public Transform transform
-    {
-        get
-        {
-            return gameObject.transform;
+            return capacidadeMaxima <= quantidadeAtual;
         }
     }
 

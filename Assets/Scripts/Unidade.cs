@@ -3,15 +3,15 @@ using System.Collections;
 
 public class Unidade : MonoBehaviour {
 
-    public GameObject objUnidade;
-    public int id;
-    public int vitalidade;
     public int idJogador;
-    [Range(0f,100f)]public float resistencia;
-    private bool isSelecionado;
 
 	// Use this for initialization
 	internal virtual void Start () {
+        IUnidade uni = GetComponent<IUnidade>();
+        if(uni != null)
+        {
+            idJogador = uni.idJogador;
+        }
         Jogador j = GetComponentInParent<Jogador>();
         if (!j)//Se jogador não for null
         {
@@ -24,17 +24,6 @@ public class Unidade : MonoBehaviour {
         {
             j.AddUnidade(this);
         }
-    }
-
-    // Update is called once per frame
-    internal virtual void Update () {
-	
-	}
-
-    public int IdJogador
-    {
-        get { return idJogador; }
-        set { idJogador = value; }
     }
 
 }

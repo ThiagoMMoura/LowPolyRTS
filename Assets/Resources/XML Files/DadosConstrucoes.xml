@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<construcoes>
+  <construcao>
+    <id>200</id>
+    <nome>Casa</nome>
+    <recurso madeira="50" pedra="20" metal="0"></recurso>
+    <descricao>Moradia para seus trabalhadores e soldados.</descricao>
+    <level>1</level>
+    <vitalidade>100</vitalidade>
+    <script arg0="wood">StorageBuilding</script>
+  </construcao>
+  <construcao>
+    <id>11</id>
+    <nome>Deposito Madeira</nome>
+    <recurso madeira="50" pedra="10" metal="0"></recurso>
+    <descricao>Deposito para armazenamento de madeira.</descricao>
+    <vitalidade>1</vitalidade>
+    <hp>130</hp>
+    <script arg0="gold">StorageBuilding</script>
+  </construcao>
+</construcoes>

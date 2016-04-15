@@ -6,6 +6,12 @@ public class Jogador : MonoBehaviour{
     public int id;
     public string nome;
     public List<Unidade> unidades;
+    public CentroDepositosRecursos centroRecursos;
+
+    void Awake()
+    {
+        centroRecursos = new CentroDepositosRecursos();
+    }
 
     void Start()
     {
@@ -14,31 +20,30 @@ public class Jogador : MonoBehaviour{
 
     public void AddUnidade(Unidade unidade)
     {
-        unidade.IdJogador = id;
+        unidade.idJogador = id;
         unidades.Add(unidade);
+
+        Deposito d = unidade.GetComponent<Deposito>();
+        if(d!=null)
+        {
+            centroRecursos.AddDeposito(d);
+        }
     }
 
-    public IDeposito ObterDepositoRecursoMaisProximo(TipoRecurso tipo, Vector3 relativeTo, bool incluiCheio = false)
+    public Deposito ObterDepositoRecursoMaisProximo(TipoRecurso tipo, Vector3 relativeTo, bool incluiCheio = false)
     {
         float minDistance = Mathf.Infinity;
-        Estatica deposito = null;
+        Deposito deposito = null;
 
-        foreach (Unidade unit in unidades)
+        foreach (Deposito unit in centroRecursos.ObterDeposito(tipo))
         {
-            if (unit is Estatica && (unit as Estatica).IsDepositoTipoRecurso(tipo))
+            float currentDistance = Vector3.Distance(unit.transform.position, relativeTo);
+            if (currentDistance < minDistance && (incluiCheio || !unit.EstaCheio))
             {
-                float currentDistance = Vector3.Distance(unit.transform.position, relativeTo);
-                if (currentDistance < minDistance && (incluiCheio || !(unit as Estatica).EstaCheio(tipo)))
-                {
-                    deposito = unit as Estatica;
-                    minDistance = currentDistance;
-                }
+                deposito = unit;
+                minDistance = currentDistance;
             }
         }
-        if (deposito != null)
-        {
-            return deposito.ObterDepositoPorTipo(tipo);
-        }
-        return null;
+        return deposito;
     }
 }
