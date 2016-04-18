@@ -7,7 +7,7 @@ public class ControlePartida : MonoBehaviour {
     public static int jogadorHumano = 1;
     private Jogador humano;
     private static List<Jogador> jogadores;
-	// Use this for initialization
+	
 	void Awake () {
         jogadores = new List<Jogador>(FindObjectsOfType<Jogador>());
         foreach(Jogador j in jogadores)

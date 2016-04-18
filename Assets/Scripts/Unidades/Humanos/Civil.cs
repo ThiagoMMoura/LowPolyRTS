@@ -2,22 +2,16 @@
 using System.Collections;
 using System;
 
-public class Civil : ICivil
+public class Civil : Humano, ICivil
 {
     public bool isTrabalhador;
 
     public PCivil propriedadesCivil;
 
-    public PCivil propriedades
+    PCivil ICivil.propriedades
     {
         get { return propriedadesCivil; }
         set { propriedadesCivil = value; }
-    }
-
-    public PHumano IHumano.propriedades
-    {
-        get { return propriedadesCivil; }
-        set { propriedadesCivil = value as PCivil; }
     }
 
     public int recursosColetadosPorSegundo
@@ -32,7 +26,7 @@ public class Civil : ICivil
     {
         get
         {
-            throw new NotImplementedException();
+            return propriedadesCivil.maxRecursosPorCarregamento;
         }
     }
 
@@ -40,7 +34,7 @@ public class Civil : ICivil
     {
         get
         {
-            throw new NotImplementedException();
+            return propriedadesCivil.tiposColetaveis;
         }
     }
 
