@@ -5,21 +5,19 @@ using System;
 [RequireComponent(typeof(Unidade))]
 [RequireComponent(typeof(Mortal))]
 [RequireComponent(typeof(Movel))]
-[RequireComponent(typeof(Coletor))]
+[RequireComponent(typeof(Atividade))]
 public class Humano : MonoBehaviour,IMortal,IHumano,IMovel {
 
     private Sexo _sexo;
     private Mortal _mortal;
+    private Atividade _atividade;
 
     public PHumano propriedadesHumano;
     public bool isReprodutor;
 
     public Sexo sexo
     {
-        get
-        {
-            return propriedadesHumano.sexo;
-        }
+        get{ return propriedadesHumano.sexo; }
     }
 
     public Mortal mortal
@@ -29,15 +27,9 @@ public class Humano : MonoBehaviour,IMortal,IHumano,IMovel {
 
     public PHumano propriedades
     {
-        get
-        {
-            return propriedadesHumano;
-        }
+        get{ return propriedadesHumano; }
 
-        set
-        {
-            propriedadesHumano = value;
-        }
+        set{ propriedadesHumano = value; }
     }
 
     int IUnidade.vitalidade
@@ -135,8 +127,22 @@ public class Humano : MonoBehaviour,IMortal,IHumano,IMovel {
         }
     }
 
+    public Atividades atividade
+    {
+        get
+        {
+            return _atividade.atividade;
+        }
+
+        set
+        {
+            _atividade.atividade = value;
+        }
+    }
+
     internal virtual void Start () {
         _mortal = GetComponent<Mortal>();
+        _atividade = GetComponent<Atividade>();
     }
 
     // Update is called once per frame
@@ -148,4 +154,42 @@ public class Humano : MonoBehaviour,IMortal,IHumano,IMovel {
 
     public virtual void Danificar(int dano) {}
 
+    public bool EstaDisponivel()
+    {
+        switch (_atividade.atividade)
+        {
+            case Atividades.carregando: {
+                    return true;
+                }
+            case Atividades.colhendo:
+                {
+                    return true;
+                }
+            case Atividades.correndo:
+                {
+                    return true;
+                }
+            case Atividades.crescendo:
+                {
+                    return false;
+                }
+            case Atividades.dormindo:
+                {
+                    return false;
+                }
+            case Atividades.marchando:
+                {
+                    return true;
+                }
+            case Atividades.morrendo:
+                {
+                    return false;
+                }
+            case Atividades.plantando:
+                {
+                    return false;
+                }
+            default: return true;
+        }
+    }
 }

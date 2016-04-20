@@ -7,4 +7,7 @@ public interface IEntidade{
     string nome { get; }
     string descricao { get; }
     PEntidade propriedades { get; set; }
+
+    Atividades atividade { get; set; }
+    bool EstaDisponivel();
 }

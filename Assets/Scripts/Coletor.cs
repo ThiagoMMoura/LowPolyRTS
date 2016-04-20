@@ -2,6 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Movel))]
+[RequireComponent(typeof(Atividade))]
 public class Coletor : MonoBehaviour {
 
     public int recursosColetadosPorSegundo;
@@ -11,6 +12,7 @@ public class Coletor : MonoBehaviour {
     private int quantidadeRecursoAtual;
     private TipoRecurso recursoAtual;
     private Movel _movel;
+    private Atividade _atividade;
     
     void Start () {
         IColetor coletor = GetComponent<IColetor>();
@@ -22,6 +24,7 @@ public class Coletor : MonoBehaviour {
             idJogador = coletor.idJogador;
         }
         _movel = GetComponent<Movel>();
+        _atividade = GetComponent<Atividade>();
 	}
 	
 	
@@ -31,11 +34,14 @@ public class Coletor : MonoBehaviour {
 
     public bool IsColetorDe(TipoRecurso tipo)
     {
-        foreach(TipoRecurso t in tiposColetaveis)
+        if (tiposColetaveis != null)
         {
-            if (t == tipo)
+            foreach (TipoRecurso t in tiposColetaveis)
             {
-                return true;
+                if (t == tipo)
+                {
+                    return true;
+                }
             }
         }
         return false;
@@ -68,7 +74,7 @@ public class Coletor : MonoBehaviour {
         return false;
     }
 
-    public IEnumerator IniciarColetaRecurso(FonteRecurso fonte)
+    public IEnumerator IniciarColetaRecursoParaDeposito(FonteRecurso fonte,Deposito deposito)
     {
         if (IsColetorDe(fonte.tipo))
         {
@@ -76,6 +82,7 @@ public class Coletor : MonoBehaviour {
             {
                 if (quantidadeRecursoAtual == 0 || recursoAtual == fonte.tipo)
                 {
+                    _atividade.atividade = Atividades.colhendo;
                     yield return StartCoroutine(_movel.MoverQualquerCustoPara(fonte.transform));
                     while (!EstaCheio())
                     {
@@ -84,15 +91,47 @@ public class Coletor : MonoBehaviour {
                     }
                     recursoAtual = fonte.tipo;
                 }
-                Deposito depositoProximo = ControlePartida.ObterJogador(idJogador).ObterDepositoRecursoMaisProximo(recursoAtual, transform.position);
-                if (depositoProximo == null)
+                _atividade.atividade = Atividades.carregando;
+                if (deposito == null)
                 {
                     print("Parando IniciarColetaRecurso");
+                    _atividade.atividade = Atividades.esperando;
                     StopAllCoroutines();
                 }
-                yield return StartCoroutine(_movel.MoverQualquerCustoPara(depositoProximo.transform));
-                quantidadeRecursoAtual -= depositoProximo.DepositarRecurso(quantidadeRecursoAtual);
+                yield return StartCoroutine(_movel.MoverQualquerCustoPara(deposito.transform));
+                quantidadeRecursoAtual -= deposito.DepositarRecurso(quantidadeRecursoAtual);
             }
         }
     }
+
+    //public IEnumerator IniciarColetaRecurso(FonteRecurso fonte)
+    //{
+    //    if (IsColetorDe(fonte.tipo))
+    //    {
+    //        while (!fonte.EstaVazio)
+    //        {
+    //            if (quantidadeRecursoAtual == 0 || recursoAtual == fonte.tipo)
+    //            {
+    //                _atividade.atividade = Atividades.colhendo;
+    //                yield return StartCoroutine(_movel.MoverQualquerCustoPara(fonte.transform));
+    //                while (!EstaCheio())
+    //                {
+    //                    yield return new WaitForSeconds(1);
+    //                    if (!ColherRecurso(fonte)) { break; }
+    //                }
+    //                recursoAtual = fonte.tipo;
+    //            }
+    //            _atividade.atividade = Atividades.carregando;
+    //            Deposito depositoProximo = ControlePartida.ObterJogador(idJogador).ObterDepositoRecursoMaisProximo(recursoAtual, transform.position);
+    //            if (depositoProximo == null)
+    //            {
+    //                print("Parando IniciarColetaRecurso");
+    //                _atividade.atividade = Atividades.esperando;
+    //                StopAllCoroutines();
+    //            }
+    //            yield return StartCoroutine(_movel.MoverQualquerCustoPara(depositoProximo.transform));
+    //            quantidadeRecursoAtual -= depositoProximo.DepositarRecurso(quantidadeRecursoAtual);
+    //        }
+    //    }
+    //}
 }

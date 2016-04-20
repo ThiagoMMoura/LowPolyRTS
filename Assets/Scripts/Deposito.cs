@@ -22,6 +22,25 @@ public class Deposito : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        foreach(Civil c in trabalhadores)
+        {
+            if (c != null && c.EstaDisponivel())
+            {
+                if(c.atividade != Atividades.colhendo && c.atividade != Atividades.carregando)
+                {
+                    FonteRecurso f = ControlePartida.mundo.ObterFonteRecursoMaisProximo(tipo,transform);
+                    if (f != null)
+                    {
+                        print(c.nome);
+                        StartCoroutine(c.ObterColetor().IniciarColetaRecursoParaDeposito(f,this));
+                    }
+                }
+            }
+        }
+    }
+
     public int CapacidadeDisponivel
     {
         get{ return capacidadeMaxima - quantidadeAtual; }

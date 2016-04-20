@@ -5,6 +5,7 @@ using InterfaceUsuario.PainelRecursos;
 
 public class ControlePartida : MonoBehaviour {
     public static int jogadorHumano = 1;
+    public static Mundo mundo;
     private Jogador humano;
     private static List<Jogador> jogadores;
 	
@@ -18,6 +19,7 @@ public class ControlePartida : MonoBehaviour {
                 humano = j;
             }
         }
+        mundo = FindObjectOfType<Mundo>();
 	}
 	
 	// Update is called once per frame

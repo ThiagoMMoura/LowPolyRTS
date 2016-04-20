@@ -15,7 +15,7 @@ public class FonteRecurso: MonoBehaviour{
     public TipoRecurso tipo;
     public int quantidade;
 
-    void Start()
+    void Awake()
     {
         IRecurso recurso = GetComponent<IRecurso>();
         if (recurso != null)
@@ -40,10 +40,10 @@ public class FonteRecurso: MonoBehaviour{
 
     public int Colher(int qtd)
     {
-        if (quantidade >= qtd)
+        if (quantidade > qtd)
         {
             quantidade -= qtd;
-            return quantidade;
+            return qtd;
         }
         int retorna = quantidade;
         quantidade = 0;

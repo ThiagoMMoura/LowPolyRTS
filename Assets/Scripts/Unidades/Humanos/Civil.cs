@@ -2,11 +2,12 @@
 using System.Collections;
 using System;
 
+[RequireComponent(typeof(Coletor))]
 public class Civil : Humano, ICivil
 {
     public bool isTrabalhador;
-
     public PCivil propriedadesCivil;
+    private Coletor _coletor;
 
     PCivil ICivil.propriedades
     {
@@ -41,6 +42,7 @@ public class Civil : Humano, ICivil
     // Use this for initialization
     internal override void Start () {
         base.Start();
+        _coletor = GetComponent<Coletor>();
 	}
 
     // Update is called once per frame
@@ -58,5 +60,10 @@ public class Civil : Humano, ICivil
                 isTrabalhador = true;
             }
         }
+    }
+
+    public Coletor ObterColetor()
+    {
+        return _coletor;
     }
 }
