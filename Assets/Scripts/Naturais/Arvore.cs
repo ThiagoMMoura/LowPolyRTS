@@ -29,5 +29,9 @@ public class Arvore : Natural,IRecurso {
 	// Update is called once per frame
 	internal override void Update () {
         base.Update();
+        if (GetComponent<FonteRecurso>().EstaVazio)
+        {
+            Destroy(gameObject);
+        }
 	}
 }
