@@ -7,14 +7,18 @@ public class Jogador : MonoBehaviour{
     public string nome;
     public List<Unidade> unidades;
     public CentroDepositosRecursos centroRecursos;
+    public TitularDadosEntidades dadosEntidades;
 
     void Awake()
     {
+        print("Jogador " + id + ": passo 1");
+        dadosEntidades = new TitularDadosEntidades();
         centroRecursos = new CentroDepositosRecursos();
     }
 
     void Start()
     {
+        print("Jogador " + id + ": passo 2");
         ControlePartida.AddJogador(this);
     }
 

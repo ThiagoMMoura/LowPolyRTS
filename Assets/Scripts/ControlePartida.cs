@@ -10,6 +10,7 @@ public class ControlePartida : MonoBehaviour {
     private static List<Jogador> jogadores;
 	
 	void Awake () {
+        print("Controle Partida: passo 1");
         jogadores = new List<Jogador>(FindObjectsOfType<Jogador>());
         foreach(Jogador j in jogadores)
         {

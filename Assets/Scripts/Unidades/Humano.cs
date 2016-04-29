@@ -12,8 +12,14 @@ public class Humano : MonoBehaviour,IMortal,IHumano,IMovel {
     private Mortal _mortal;
     private Atividade _atividade;
 
+    public int id;
     public PHumano propriedadesHumano;
     public bool isReprodutor;
+
+    public virtual void Awake()
+    {
+        propriedades = GetComponentInParent<Jogador>().dadosEntidades.ObterEntidadePorId(id) as PHumano;
+    }
 
     public Sexo sexo
     {
@@ -40,24 +46,16 @@ public class Humano : MonoBehaviour,IMortal,IHumano,IMovel {
         }
     }
 
-    public int vitalidadeAtual
-    {
-        get
-        {
-            return propriedadesHumano.vitalidadeAtual;
-        }
-    }
-
     int IUnidade.idJogador
     {
         get
         {
-            return propriedadesHumano.idJogador;
+            return GetComponent<Unidade>().idJogador;
         }
 
         set
         {
-            propriedadesHumano.idJogador = value;
+            GetComponent<Unidade>().idJogador = value;
         }
     }
 

@@ -13,7 +13,7 @@
   <construcao>
     <id>11</id>
     <nome>Deposito Madeira</nome>
-    <recurso madeira="50" pedra="10" metal="0"></recurso>
+    <recursosNecessarios alimento="0" madeira="50" pedra="10" metal="0"></recursosNecessarios>
     <descricao>Deposito para armazenamento de madeira.</descricao>
     <vitalidade>1</vitalidade>
     <hp>130</hp>

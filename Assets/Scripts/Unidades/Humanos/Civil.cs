@@ -9,7 +9,13 @@ public class Civil : Humano, ICivil
     public PCivil propriedadesCivil;
     private Coletor _coletor;
 
-    PCivil ICivil.propriedades
+    public override void Awake()
+    {
+        base.Awake();
+        propriedades = GetComponentInParent<Jogador>().dadosEntidades.ObterEntidadePorId(id) as PCivil;
+    }
+
+    public new PCivil propriedades
     {
         get { return propriedadesCivil; }
         set { propriedadesCivil = value; }

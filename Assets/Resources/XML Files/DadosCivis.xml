@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<civis>
+  <civil>
+    <id>1</id>
+    <nome>Aldeão</nome>
+    <sexo>M</sexo>
+    <recursosNecessarios alimento="50" madeira="0" ouro="0" pedra="0"></recursosNecessarios>
+    <descricao></descricao>
+    <vitalidade>100</vitalidade>
+    <nivel>1</nivel>
+    <velocidade>3</velocidade>
+    <expectativaDeVida>38</expectativaDeVida>
+    <recursosColetadosPorSegundo>1</recursosColetadosPorSegundo>
+    <maxRecursosPorCarregamento>15</maxRecursosPorCarregamento>
+    <tiposColetaveis arg0="alimento" arg1="madeira" arg2="pedra" arg3="ouro"></tiposColetaveis>
+  </civil>
+  <civil>
+    <id>2</id>
+    <nome>Aldeã</nome>
+    <sexo>F</sexo>
+    <recursosNecessarios alimento="50" madeira="0" ouro="0" pedra="0"></recursosNecessarios>
+    <descricao></descricao>
+    <vitalidade>100</vitalidade>
+    <nivel>1</nivel>
+    <velocidade>3</velocidade>
+    <expectativaDeVida>38</expectativaDeVida>
+    <recursosColetadosPorSegundo>1</recursosColetadosPorSegundo>
+    <maxRecursosPorCarregamento>15</maxRecursosPorCarregamento>
+    <tiposColetaveis arg0="alimento" arg1="madeira" arg2="pedra" arg3="ouro"></tiposColetaveis>
+  </civil>
+</civis>

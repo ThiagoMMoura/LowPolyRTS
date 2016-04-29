@@ -7,11 +7,11 @@ public class Unidade : MonoBehaviour {
 
 	// Use this for initialization
 	internal virtual void Start () {
-        IUnidade uni = GetComponent<IUnidade>();
-        if(uni != null)
-        {
-            idJogador = uni.idJogador;
-        }
+        //IUnidade uni = GetComponent<IUnidade>();
+        //if(uni != null)
+        //{
+        //    idJogador = uni.idJogador;
+        //}
         Jogador j = GetComponentInParent<Jogador>();
         if (!j)//Se jogador não for null
         {

@@ -33,7 +33,6 @@ public class Deposito : MonoBehaviour
                     FonteRecurso f = ControlePartida.mundo.ObterFonteRecursoMaisProximo(tipo,transform);
                     if (f != null)
                     {
-                        print(c.nome);
                         StartCoroutine(c.ObterColetor().IniciarColetaRecursoParaDeposito(f,this));
                     }
                 }

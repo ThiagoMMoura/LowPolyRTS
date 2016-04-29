@@ -27,6 +27,20 @@ public class Mundo : MonoBehaviour {
         }
     }
 
+    public bool RemoveNatural(Natural natu)
+    {
+        if (_natural.Remove(natu))
+        {
+            FonteRecurso f = natu.GetComponent<FonteRecurso>();
+            if (f != null)
+            {
+                return centroFonteRecursos.RemoveFonteRecurso(f);
+            }
+            return true;
+        }
+        return false;
+    }
+
     public FonteRecurso ObterFonteRecursoMaisProximo(TipoRecurso tipo, Transform target)
     {
         float minDistance = Mathf.Infinity;

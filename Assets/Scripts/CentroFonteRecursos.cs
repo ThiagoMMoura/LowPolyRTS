@@ -36,6 +36,26 @@ public class CentroFonteRecursos {
         }
     }
 
+    public bool RemoveFonteRecurso(FonteRecurso fonte)
+    {
+        switch (fonte.tipo)
+        {
+            case TipoRecurso.Pedra:
+                {
+                    return _pedra.Remove(fonte);
+                }
+            case TipoRecurso.Madeira:
+                {
+                    return _madeira.Remove(fonte);
+                }
+            case TipoRecurso.Ouro:
+                {
+                    return _ouro.Remove(fonte);
+                }
+        }
+        return false;
+    }
+
     public bool AddFonteRecursoMadeira(FonteRecurso fonte)
     {
         if (fonte.tipo == TipoRecurso.Madeira)

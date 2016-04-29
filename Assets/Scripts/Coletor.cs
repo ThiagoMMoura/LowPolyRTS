@@ -78,6 +78,7 @@ public class Coletor : MonoBehaviour {
     {
         if (IsColetorDe(fonte.tipo))
         {
+            Atividades anterior = _atividade.atividade;
             while (!fonte.EstaVazio)
             {
                 if (quantidadeRecursoAtual == 0 || recursoAtual == fonte.tipo)
@@ -101,6 +102,7 @@ public class Coletor : MonoBehaviour {
                 yield return StartCoroutine(_movel.MoverQualquerCustoPara(deposito.transform));
                 quantidadeRecursoAtual -= deposito.DepositarRecurso(quantidadeRecursoAtual);
             }
+            _atividade.atividade = anterior;
         }
     }
 

@@ -5,6 +5,6 @@ using System.Collections;
 public class PUnidade: PEntidade {
 
     public int vitalidade;
-    public int vitalidadeAtual;
-    public int idJogador;
+    public int nivel;
+    public RecursosNecessarios recursosNecessarios;
 }

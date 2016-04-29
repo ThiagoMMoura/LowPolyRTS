@@ -5,6 +5,7 @@ using System.Collections;
 public class Arvore : Natural,IRecurso {
     public PArvore _propriedadesArvore;
 
+
     public int quantidade
     {
         get
@@ -29,9 +30,21 @@ public class Arvore : Natural,IRecurso {
 	// Update is called once per frame
 	internal override void Update () {
         base.Update();
-        if (GetComponent<FonteRecurso>().EstaVazio)
+        if (GetComponent<FonteRecurso>().EstaVazio && atividade != Atividades.morrendo)
         {
-            Destroy(gameObject);
+            print("morrendo");
+            StartCoroutine(Morrer());
         }
 	}
+
+    public IEnumerator Morrer()
+    {
+        atividade = Atividades.morrendo;
+        yield return new WaitForSeconds(1);
+        if (ControlePartida.mundo.RemoveNatural(this))
+        {
+            atividade = Atividades.esperando;
+            Destroy(gameObject);
+        }
+    }
 }
