@@ -10,9 +10,10 @@ GameObject:
   - 4: {fileID: 450406}
   - 33: {fileID: 3345516}
   - 23: {fileID: 2349964}
-  - 114: {fileID: 11419080}
-  - 208: {fileID: 20851130}
   - 64: {fileID: 6426256}
+  - 208: {fileID: 20851130}
+  - 114: {fileID: 11469362}
+  - 114: {fileID: 11460000}
   m_Layer: 0
   m_Name: Deposito
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 186802}
   m_LocalRotation: {x: 0, y: 0.6261011, z: 0, w: 0.77974194}
-  m_LocalPosition: {x: -34.4, y: 54.2, z: -61.4}
-  m_LocalScale: {x: 35.064716, y: 7.5383387, z: 35.064724}
+  m_LocalPosition: {x: -41.46, y: 47.8, z: -71.12}
+  m_LocalScale: {x: 8.2067375, y: 1.1094091, z: 8.206745}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -77,7 +78,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &11419080
+--- !u!114 &11460000
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -85,18 +86,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 186802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59ea9626dc31fac42ae5507f384b06c2, type: 3}
+  m_Script: {fileID: 11500000, guid: a8c2cafe56a086343ba770b1e6388fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objUnidade: {fileID: 186802}
-  id: 1
-  vitalidade: 10
-  idJogador: 0
-  resistencia: 0
-  depositos:
-  - gameObject: {fileID: 186802}
-    tipo: 1
-    capacidadeMaxima: 1000
+  tipo: 1
+  capacidadeMaxima: 1500
+  quantidadeAtual: 0
+  maxTrabalhadores: 3
+  trabalhadores:
+  - {fileID: 0}
+--- !u!114 &11469362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1168b17420f66d41b125a742f3d9610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idJogador: 1
 --- !u!208 &20851130
 NavMeshObstacle:
   m_ObjectHideFlags: 1
@@ -106,7 +116,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_Extents: {x: 0.42, y: 1, z: 0.42}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
